@@ -39,3 +39,47 @@ repo <- url_split[length(url_split)]
 ```r
 org_repo <- sprintf('%s/%s', org, repo)
 ```
+
+# Exploring the Github v3 API
+
+The main REST API v3 documentation is here: https://developer.github.com/v3/
+
+We can run the `curl` command to querry the API
+
+```bash
+curl -i https://api.github.com/users/octocat/orgs
+```
+
+The results may look like this:
+```bash
+HTTP/1.1 200 OK
+Server: GitHub.com
+Date: Thu, 12 Apr 2018 15:57:43 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 5
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 59
+X-RateLimit-Reset: 1523552263
+Cache-Control: public, max-age=60, s-maxage=60
+Vary: Accept
+ETag: "98f0c1b396a4e5d54f4d5fe561d54b44"
+X-GitHub-Media-Type: github.v3; format=json
+Access-Control-Expose-Headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+Access-Control-Allow-Origin: *
+Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+X-Frame-Options: deny
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+Content-Security-Policy: default-src 'none'
+X-Runtime-rack: 0.012705
+X-GitHub-Request-Id: 8000:5D3D:AE335A:15477B4:5ACF81F7
+
+[
+
+]
+```
+The things to watch out for are the `X-RateLimit-Limit` and `X-RateLimit-Remaining` values.
+If you do not have an API key there is a [rate limit](https://developer.github.com/v3/#rate-limiting) of 60 querries per hour.
+This is a good way to not use up your actual API key rates if you want to play around with what comes out of the REST API call.
