@@ -252,3 +252,6 @@ Each week is stored as a dataframe with the POXIX-time, num additions, deletions
 ```
 
 ## Using `gh`
+
+You might also want to checkout the `gh` package in R,
+which is a light wrapper around the github API: https://github.com/r-lib/gh
